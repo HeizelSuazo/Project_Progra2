@@ -34,12 +34,14 @@ def pacientes_agregar():
     if request.method == 'POST':
         conn = get_db_connection()
         cursor = conn.cursor()
-        nombre = request.form['PacNombre']
-        apellido = request.form['PacApellido']
-        correo = request.form['PacCorreo']
-        telefono = request.form['PacTelefono']
-        cursor.execute("INSERT INTO pacientes (PacNombre, PacApellido, PacCorreo, PacTelefono) VALUES (%s, %s, %s, %s)", 
-                       (nombre, apellido, correo, telefono))
+        identidad = request.form['Identidad']
+        nombre = request.form['Nombre']
+        apellido = request.form['Apellido']
+        telefono = request.form['Telefono']
+        correo = request.form['Correo']
+        direccion = request.form['Direcciom']
+        cursor.execute("INSERT INTO pacientes (Identidad, Nombre, Apellido, Telefono, Correo, Direccion) VALUES (%s, %s, %s, %s)", 
+                       (identidad, nombre, apellido, telefono, correo, direccion))
         conn.commit()
         conn.close()
         return redirect(url_for('pacientes_index'))
@@ -50,18 +52,20 @@ def pacientes_editar(codigo):
     conn = get_db_connection()
     if request.method == 'GET':
         cur = conn.cursor()
-        cur.execute("SELECT * FROM pacientes WHERE PacCodigo = %s", (codigo,))
+        cur.execute("SELECT * FROM pacientes WHERE Codigo = %s", (codigo,))
         paciente = cur.fetchone()
         conn.close()
         return render_template('pacientes/editar.html', paciente=paciente)
     elif request.method == 'POST':
         cursor = conn.cursor()
-        nombre = request.form['PacNombre']
-        apellido = request.form['PacApellido']
-        correo = request.form['PacCorreo']
-        telefono = request.form['PacTelefono']
-        cursor.execute("UPDATE pacientes SET PacNombre=%s, PacApellido=%s, PacCorreo=%s, PacTelefono=%s WHERE PacCodigo=%s", 
-                       (nombre, apellido, correo, telefono, codigo))
+        identidad = request.form['Identidad']
+        nombre = request.form['Nombre']
+        apellido = request.form['Apellido']
+        telefono = request.form['Telefono']
+        correo = request.form['Correo']
+        direccion = request.form['Direcciom']
+        cursor.execute("UPDATE pacientes SET Identidad=%s, Nombre=%s, Apellido=%s, Telefono=%s, Correo=%s, Direccion=%s WHERE Codigo=%s", 
+                       (identidad, nombre, apellido, telefono, correo, direccion, codigo))
         conn.commit()
         conn.close()
         return redirect(url_for('pacientes_index'))
@@ -71,13 +75,13 @@ def pacientes_eliminar(codigo):
     conn = get_db_connection()
     if request.method == 'GET':
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM pacientes WHERE PacCodigo = %s", (codigo,))
+        cursor.execute("SELECT * FROM pacientes WHERE Codigo = %s", (codigo,))
         paciente = cursor.fetchone()
         conn.close()
         return render_template('pacientes/eliminar.html', paciente=paciente)
     elif request.method == 'POST':
         cursor = conn.cursor()
-        cursor.execute("DELETE FROM pacientes WHERE PacCodigo = %s", (codigo,))
+        cursor.execute("DELETE FROM pacientes WHERE Codigo = %s", (codigo,))
         conn.commit()
         conn.close()
         return redirect(url_for('pacientes_index'))
