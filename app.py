@@ -1,0 +1,153 @@
+from flask import Flask, render_template, request, redirect, url_for
+import mysql.connector
+
+app = Flask(__name__)
+
+# Función para conectar a la BD
+def get_db_connection():
+    return mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='',
+        database='Project_Progra2',
+        ssl_disabled=True
+    )
+
+@app.route("/")
+def index():
+    return render_template('index.html')
+
+# ======================= CRUD PACIENTES =======================
+
+@app.route("/pacientes/")
+def pacientes_index():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM pacientes")
+    datos = cur.fetchall()
+    cur.close()
+    conn.close()
+    return render_template('pacientes/index.html', lista_pacientes=datos)
+
+@app.route("/pacientes/agregar", methods=["GET", "POST"])
+def pacientes_agregar():
+    if request.method == 'POST':
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        nombre = request.form['PacNombre']
+        apellido = request.form['PacApellido']
+        correo = request.form['PacCorreo']
+        telefono = request.form['PacTelefono']
+        cursor.execute("INSERT INTO pacientes (PacNombre, PacApellido, PacCorreo, PacTelefono) VALUES (%s, %s, %s, %s)", 
+                       (nombre, apellido, correo, telefono))
+        conn.commit()
+        conn.close()
+        return redirect(url_for('pacientes_index'))
+    return render_template('pacientes/agregar.html')
+
+@app.route("/pacientes/editar/<string:codigo>", methods=["GET", "POST"])
+def pacientes_editar(codigo):
+    conn = get_db_connection()
+    if request.method == 'GET':
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM pacientes WHERE PacCodigo = %s", (codigo,))
+        paciente = cur.fetchone()
+        conn.close()
+        return render_template('pacientes/editar.html', paciente=paciente)
+    elif request.method == 'POST':
+        cursor = conn.cursor()
+        nombre = request.form['PacNombre']
+        apellido = request.form['PacApellido']
+        correo = request.form['PacCorreo']
+        telefono = request.form['PacTelefono']
+        cursor.execute("UPDATE pacientes SET PacNombre=%s, PacApellido=%s, PacCorreo=%s, PacTelefono=%s WHERE PacCodigo=%s", 
+                       (nombre, apellido, correo, telefono, codigo))
+        conn.commit()
+        conn.close()
+        return redirect(url_for('pacientes_index'))
+
+@app.route("/pacientes/eliminar/<string:codigo>", methods=["GET", "POST"])
+def pacientes_eliminar(codigo):
+    conn = get_db_connection()
+    if request.method == 'GET':
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM pacientes WHERE PacCodigo = %s", (codigo,))
+        paciente = cursor.fetchone()
+        conn.close()
+        return render_template('pacientes/eliminar.html', paciente=paciente)
+    elif request.method == 'POST':
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM pacientes WHERE PacCodigo = %s", (codigo,))
+        conn.commit()
+        conn.close()
+        return redirect(url_for('pacientes_index'))
+
+# ======================= CRUD DOCTORES =======================
+
+@app.route("/doctores/")
+def doctores_index():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM doctores")
+    datos = cur.fetchall()
+    cur.close()
+    conn.close()
+    return render_template('doctores/index.html', lista_doctores=datos)
+
+@app.route("/doctores/agregar", methods=["GET", "POST"])
+def doctores_agregar():
+    if request.method == 'POST':
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        nombre = request.form['DocNombre']
+        apellido = request.form['DocApellido']
+        especialidad = request.form['DocEspecialidad']
+        telefono = request.form['DocTelefono']
+        cursor.execute("INSERT INTO doctores (DocNombre, DocApellido, DocEspecialidad, DocTelefono) VALUES (%s, %s, %s, %s)", 
+                       (nombre, apellido, especialidad, telefono))
+        conn.commit()
+        conn.close()
+        return redirect(url_for('doctores_index'))
+    return render_template('doctores/agregar.html')
+
+@app.route("/doctores/editar/<string:codigo>", methods=["GET", "POST"])
+def doctores_editar(codigo):
+    conn = get_db_connection()
+    if request.method == 'GET':
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM doctores WHERE DocCodigo = %s", (codigo,))
+        doctor = cur.fetchone()
+        conn.close()
+        return render_template('doctores/editar.html', doctor=doctor)
+    elif request.method == 'POST':
+        cursor = conn.cursor()
+        nombre = request.form['DocNombre']
+        apellido = request.form['DocApellido']
+        especialidad = request.form['DocEspecialidad']
+        telefono = request.form['DocTelefono']
+        cursor.execute("UPDATE doctores SET DocNombre=%s, DocApellido=%s, DocEspecialidad=%s, DocTelefono=%s WHERE DocCodigo=%s", 
+                       (nombre, apellido, especialidad, telefono, codigo))
+        conn.commit()
+        conn.close()
+        return redirect(url_for('doctores_index'))
+
+@app.route("/doctores/eliminar/<string:codigo>", methods=["GET", "POST"])
+def doctores_eliminar(codigo):
+    conn = get_db_connection()
+    if request.method == 'GET':
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM doctores WHERE DocCodigo = %s", (codigo,))
+        doctor = cursor.fetchone()
+        conn.close()
+        return render_template('doctores/eliminar.html', doctor=doctor)
+    elif request.method == 'POST':
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM doctores WHERE DocCodigo = %s", (codigo,))
+        conn.commit()
+        conn.close()
+        return redirect(url_for('doctores_index'))
+
+if __name__ == '__main__':
+    app.jinja_env.auto_reload = True
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
+    app.run(debug=True)
