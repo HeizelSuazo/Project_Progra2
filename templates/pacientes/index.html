@@ -19,14 +19,14 @@
                 <th>Código</th><th>Identidad</th><th>Nombre</th><th>Apellido</th><th>Fecha de Nacimiento</th><th>Telefono</th><th>Correo</th><th>Direccion</th><th>Acciones</th>
             </tr>
         </thead>
-        <tbody>
+       <tbody>
             {% for paciente in lista_pacientes %}
             <tr>
-                <td>{{ paciente.0 }}</td><td>{{ paciente.1 }}</td><td>{{ paciente.2 }}</td>
-                <td>{{ paciente.3 }}</td><td>{{ paciente.4 }}</td>
-                <td>
-                    <a href="/pacientes/editar/{{ paciente.0 }}" class="btn btn-warning btn-sm">Editar</a>
-                    <a href="/pacientes/eliminar/{{ paciente.0 }}" class="btn btn-danger btn-sm">Eliminar</a>
+                <td>{{ paciente.0 }}</td> <td>{{ paciente.1 }}</td> <td>{{ paciente.2 }}</td> <td>{{ paciente.3 }}</td> <td>{{ paciente.4 }}</td> <td>{{ paciente.5 }}</td> <td>{{ paciente.6 }}</td> <td>{{ paciente.7 }}</td> <td>
+                    <div class="d-flex gap-2">
+                        <a href="/pacientes/editar/{{ paciente.0 }}" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="/pacientes/eliminar/{{ paciente.0 }}" class="btn btn-danger btn-sm">Eliminar</a>
+                    </div>
                 </td>
             </tr>
             {% endfor %}
