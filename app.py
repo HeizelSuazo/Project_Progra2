@@ -39,7 +39,7 @@ def pacientes_agregar():
         apellido = request.form['Apellido']
         telefono = request.form['Telefono']
         correo = request.form['Correo']
-        direccion = request.form['Direcciom']
+        direccion = request.form['Direccion']
         cursor.execute("INSERT INTO pacientes (Identidad, Nombre, Apellido, Telefono, Correo, Direccion) VALUES (%s, %s, %s, %s, %s, %s)", 
                        (identidad, nombre, apellido, telefono, correo, direccion))
         conn.commit()
