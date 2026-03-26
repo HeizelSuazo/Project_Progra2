@@ -37,11 +37,11 @@ def pacientes_agregar():
         identidad = request.form['Identidad']
         nombre = request.form['Nombre']
         apellido = request.form['Apellido']
-        fecha =  request.form['Fecha de Nacimiento']
+        fecha =  request.form['Fecha']
         telefono = request.form['Telefono']
         correo = request.form['Correo']
         direccion = request.form['Direccion']
-        cursor.execute("INSERT INTO pacientes (Identidad, Nombre, Apellido, Fecha de Nacimiento, Telefono, Correo, Direccion) VALUES (%s, %s, %s, %s, %s, %s, %s)", 
+        cursor.execute("INSERT INTO pacientes (Identidad, Nombre, Apellido, Fecha, Telefono, Correo, Direccion) VALUES (%s, %s, %s, %s, %s, %s, %s)", 
                        (identidad, nombre, apellido, fecha, telefono, correo, direccion))
         conn.commit()
         conn.close()
@@ -62,11 +62,11 @@ def pacientes_editar(codigo):
         identidad = request.form['Identidad']
         nombre = request.form['Nombre']
         apellido = request.form['Apellido']
-        fecha =  request.form['Fecha de Nacimiento']
+        fecha =  request.form['Fecha']
         telefono = request.form['Telefono']
         correo = request.form['Correo']
         direccion = request.form['Direcciom']
-        cursor.execute("UPDATE pacientes SET Identidad=%s, Nombre=%s, Apellido=%s, Fecha de Nacimiento=%s, Telefono=%s, Correo=%s, Direccion=%s WHERE Codigo=%s", 
+        cursor.execute("UPDATE pacientes SET Identidad=%s, Nombre=%s, Apellido=%s, Fecha=%s, Telefono=%s, Correo=%s, Direccion=%s WHERE Codigo=%s", 
                        (identidad, nombre, apellido, fecha, telefono, correo, direccion, codigo))
         conn.commit()
         conn.close()
