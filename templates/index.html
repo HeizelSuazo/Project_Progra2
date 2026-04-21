@@ -7,10 +7,9 @@
     <div class="row align-items-center g-4">
         <div class="col-lg-7">
             <span class="badge rounded-pill text-bg-light text-primary-emphasis mb-3">Project_Progra2</span>
-            <h1 class="display-6 fw-bold mb-3">Sistema de gestion clinica con Blueprints, ORM y vistas modernas</h1>
+            <h1 class="display-6 fw-bold mb-3">Sistema de gestion clinica </h1>
             <p class="lead text-secondary mb-4">
-                Administra pacientes y doctores con una estructura mas ordenada,
-                tablas dinamicas y una interfaz basada en Bootstrap.
+                Administra pacientes y doctores 
             </p>
             <div class="d-flex flex-wrap gap-2">
                 <a href="{{ url_for('pacientes.index') }}" class="btn btn-primary btn-lg">
@@ -21,20 +20,6 @@
                 </a>
             </div>
         </div>
-        <div class="col-lg-5">
-            <div class="card border-0 shadow-lg dashboard-card">
-                <div class="card-body p-4">
-                    <h2 class="h4 mb-3">Resumen de la estructura</h2>
-                    <div class="feature-list">
-                        <div><i class="bi bi-diagram-3-fill text-primary"></i><span>Blueprints para separar modulos</span></div>
-                        <div><i class="bi bi-table text-success"></i><span>DataTables para consultas rapidas</span></div>
-                        <div><i class="bi bi-database-fill-check text-warning"></i><span>ORM en la entidad Paciente</span></div>
-                        <div><i class="bi bi-palette-fill text-danger"></i><span>Layout comun con CSS en static</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </section>
 
 <section class="row g-4">
@@ -45,10 +30,6 @@
                     <i class="bi bi-person-vcard-fill"></i>
                 </div>
                 <h2 class="h4">Pacientes</h2>
-                <p class="text-secondary">
-                    CRUD completo usando SQLAlchemy como base ORM para demostrar
-                    una estructura mas mantenible.
-                </p>
                 <a href="{{ url_for('pacientes.index') }}" class="btn btn-primary">
                     Ver pacientes
                 </a>
@@ -62,10 +43,6 @@
                     <i class="bi bi-hospital-fill"></i>
                 </div>
                 <h2 class="h4">Doctores</h2>
-                <p class="text-secondary">
-                    CRUD separado en su blueprint, manteniendo la conexion con
-                    MySQL para contrastar ambos enfoques.
-                </p>
                 <a href="{{ url_for('doctores.index') }}" class="btn btn-success">
                     Ver doctores
                 </a>
