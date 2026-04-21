@@ -1,34 +1,76 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Clínica - Inicio</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
-    <nav class="navbar navbar-dark bg-dark mb-4">
-        <div class="container">
-            <a class="navbar-brand" href="/">Sistema Clínico Progra2</a>
-        </div>
-    </nav>
-    <div class="container text-center mt-5">
-        <h1 class="mb-5">Bienvenido al Sistema de Gestión Clínica</h1>
-        <div class="row justify-content-center">
-            <div class="col-md-5">
-                <div class="card shadow p-4">
-                    <h3>Módulo Pacientes</h3>
-                    <p>Gestiona los expedientes de los pacientes.</p>
-                    <a href="/pacientes/" class="btn btn-primary">Ir a Pacientes</a>
-                </div>
+{% extends "layout.html" %}
+
+{% block title %}Inicio | Sistema Clinico{% endblock %}
+
+{% block content %}
+<section class="hero-section rounded-4 p-4 p-lg-5 mb-4">
+    <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+            <span class="badge rounded-pill text-bg-light text-primary-emphasis mb-3">Project_Progra2</span>
+            <h1 class="display-6 fw-bold mb-3">Sistema de gestion clinica con Blueprints, ORM y vistas modernas</h1>
+            <p class="lead text-secondary mb-4">
+                Administra pacientes y doctores con una estructura mas ordenada,
+                tablas dinamicas y una interfaz basada en Bootstrap.
+            </p>
+            <div class="d-flex flex-wrap gap-2">
+                <a href="{{ url_for('pacientes.index') }}" class="btn btn-primary btn-lg">
+                    <i class="bi bi-people-fill me-2"></i>Modulo Pacientes
+                </a>
+                <a href="{{ url_for('doctores.index') }}" class="btn btn-outline-success btn-lg">
+                    <i class="bi bi-heart-pulse-fill me-2"></i>Modulo Doctores
+                </a>
             </div>
-            <div class="col-md-5">
-                <div class="card shadow p-4">
-                    <h3>Módulo Doctores</h3>
-                    <p>Gestiona el personal médico y especialidades.</p>
-                    <a href="/doctores/" class="btn btn-success">Ir a Doctores</a>
+        </div>
+        <div class="col-lg-5">
+            <div class="card border-0 shadow-lg dashboard-card">
+                <div class="card-body p-4">
+                    <h2 class="h4 mb-3">Resumen de la estructura</h2>
+                    <div class="feature-list">
+                        <div><i class="bi bi-diagram-3-fill text-primary"></i><span>Blueprints para separar modulos</span></div>
+                        <div><i class="bi bi-table text-success"></i><span>DataTables para consultas rapidas</span></div>
+                        <div><i class="bi bi-database-fill-check text-warning"></i><span>ORM en la entidad Paciente</span></div>
+                        <div><i class="bi bi-palette-fill text-danger"></i><span>Layout comun con CSS en static</span></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</body>
-</html>
+</section>
+
+<section class="row g-4">
+    <div class="col-md-6">
+        <article class="card h-100 shadow-sm border-0 module-card">
+            <div class="card-body p-4">
+                <div class="icon-chip bg-primary-subtle text-primary mb-3">
+                    <i class="bi bi-person-vcard-fill"></i>
+                </div>
+                <h2 class="h4">Pacientes</h2>
+                <p class="text-secondary">
+                    CRUD completo usando SQLAlchemy como base ORM para demostrar
+                    una estructura mas mantenible.
+                </p>
+                <a href="{{ url_for('pacientes.index') }}" class="btn btn-primary">
+                    Ver pacientes
+                </a>
+            </div>
+        </article>
+    </div>
+    <div class="col-md-6">
+        <article class="card h-100 shadow-sm border-0 module-card">
+            <div class="card-body p-4">
+                <div class="icon-chip bg-success-subtle text-success mb-3">
+                    <i class="bi bi-hospital-fill"></i>
+                </div>
+                <h2 class="h4">Doctores</h2>
+                <p class="text-secondary">
+                    CRUD separado en su blueprint, manteniendo la conexion con
+                    MySQL para contrastar ambos enfoques.
+                </p>
+                <a href="{{ url_for('doctores.index') }}" class="btn btn-success">
+                    Ver doctores
+                </a>
+            </div>
+        </article>
+    </div>
+</section>
+{% endblock %}

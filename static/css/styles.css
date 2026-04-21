@@ -1,0 +1,138 @@
+:root {
+    --bg-main: #f4efe6;
+    --ink: #1f2a37;
+    --muted: #5f6b7a;
+    --brand-deep: #0b4fb3;
+    --card-border: rgba(31, 42, 55, 0.08);
+}
+
+body {
+    font-family: "Outfit", sans-serif;
+    color: var(--ink);
+    background:
+        radial-gradient(circle at top left, rgba(13, 110, 253, 0.12), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(25, 135, 84, 0.14), transparent 22%),
+        linear-gradient(180deg, #fffdf8 0%, #f4efe6 100%);
+    min-height: 100vh;
+}
+
+.clinic-nav {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 250, 243, 0.88);
+    border-bottom: 1px solid rgba(31, 42, 55, 0.08);
+}
+
+.hero-section,
+.module-card,
+.dashboard-card,
+.form-shell .card,
+.confirm-shell .card,
+.table-responsive {
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid var(--card-border);
+}
+
+.hero-section {
+    box-shadow: 0 24px 60px rgba(13, 27, 45, 0.08);
+}
+
+.feature-list {
+    display: grid;
+    gap: 0.9rem;
+}
+
+.feature-list div {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--muted);
+    font-weight: 500;
+}
+
+.icon-chip,
+.danger-icon {
+    width: 56px;
+    height: 56px;
+    display: grid;
+    place-items: center;
+    border-radius: 18px;
+    font-size: 1.4rem;
+}
+
+.danger-icon {
+    background: rgba(220, 53, 69, 0.12);
+    color: #dc3545;
+}
+
+.eyebrow {
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brand-deep);
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.text-secondary {
+    color: var(--muted) !important;
+}
+
+.form-shell {
+    max-width: 900px;
+}
+
+.confirm-shell {
+    max-width: 640px;
+}
+
+.table thead th {
+    border-bottom: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.table > :not(caption) > * > * {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.dataTables_wrapper .dataTables_filter input,
+.dataTables_wrapper .dataTables_length select,
+.form-control {
+    border-radius: 0.9rem;
+    border-color: rgba(31, 42, 55, 0.15);
+    min-height: 46px;
+}
+
+.btn {
+    border-radius: 0.9rem;
+    font-weight: 600;
+}
+
+.module-card,
+.dashboard-card,
+.hero-section,
+.form-shell .card,
+.confirm-shell .card {
+    animation: rise 0.45s ease;
+}
+
+@keyframes rise {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 1.5rem !important;
+    }
+
+    .table-responsive {
+        border-radius: 1rem;
+    }
+}
